@@ -50,14 +50,24 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 ),
             ]),
 
-            MenuItem::make('ESPOCH', 'https://www.espoch.edu.ec')
-                ->badge(fn() => 'Check')
-                ->blank(),
-
             // MenuItem::make(
             //     static fn() => __('Solicitud de Mantenimiento'), 
             //     new MoonShineSolicitudMantenimiento()
             // ),
+
+            // MenuItem::make(
+            //     static fn() => __('Asignación del Mantenimiento'), 
+            //     new MoonShineAsignacionMantenimiento()
+            // ),
+
+            // MenuItem::make(
+            //     static fn() => __('Informes'),
+            //     new MoonShineInformes()
+            // ),
+
+            MenuItem::make('ESPOCH', 'https://www.espoch.edu.ec')
+            ->badge(fn() => 'Check')
+            ->blank(),
         ];
     }
 
