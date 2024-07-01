@@ -8,12 +8,14 @@ use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
 use MoonShine\Menu\MenuItem;
+use MoonShine\Menu\MenuDivider;
 use MoonShine\Resources\MoonShineUserResource;
 use MoonShine\Resources\MoonShineUserRoleResource;
 use MoonShine\Contracts\Resources\ResourceContract;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
+use Illuminate\Http\Request; 
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -44,11 +46,18 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     static fn() => __('Administradores'),
                     new MoonShineUserResource()
                 ),
+
+                MenuDivider::make(),
+
                 MenuItem::make(
                     static fn() => __('Roles'),
                     new MoonShineUserRoleResource()
-                ),
-            ]),
+                ) 
+
+            ],'heroicons.computer-desktop')->canSee(fn()=> false)   
+            ->canSee(function(Request $request){
+                return $request->user('moonshine')?->name === 'darwin.quezada';
+            }),
 
             // MenuItem::make(
             //     static fn() => __('Solicitud de Mantenimiento'), 
@@ -58,12 +67,18 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             // MenuItem::make(
             //     static fn() => __('Asignación del Mantenimiento'), 
             //     new MoonShineAsignacionMantenimiento()
-            // ),
+            // )->canSee(fn()=> false)   
+            //     ->canSee(function(Request $request){
+            //         return $request->user('moonshine')?->name === 'darwin.quezada';
+            //     }),
 
             // MenuItem::make(
             //     static fn() => __('Informes'),
             //     new MoonShineInformes()
-            // ),
+            // )->canSee(fn()=> false)   
+            //     ->canSee(function(Request $request){
+            //         return $request->user('moonshine')?->rol === 'Administrador' || $request->user('moonshine')?->rol === 'Tecnico';;
+            //     }),
 
             MenuItem::make('ESPOCH', 'https://www.espoch.edu.ec')
             ->badge(fn() => 'Check')
