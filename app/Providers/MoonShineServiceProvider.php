@@ -12,6 +12,7 @@ use MoonShine\Menu\MenuDivider;
 use MoonShine\Resources\MoonShineUserResource;
 use MoonShine\Resources\MoonShineUserRoleResource;
 use MoonShine\Contracts\Resources\ResourceContract;
+use App\MoonShine\Resources\SolicitudResource;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
@@ -59,10 +60,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 return $request->user('moonshine')?->name === 'darwin.quezada';
             }),
 
-            // MenuItem::make(
-            //     static fn() => __('Solicitud de Mantenimiento'), 
-            //     new MoonShineSolicitudMantenimiento()
-            // ),
+            MenuItem::make(
+                static fn() => __('Solicitud de Mantenimiento'), 
+                new SolicitudResource()
+            ),
 
             // MenuItem::make(
             //     static fn() => __('Asignación del Mantenimiento'), 
