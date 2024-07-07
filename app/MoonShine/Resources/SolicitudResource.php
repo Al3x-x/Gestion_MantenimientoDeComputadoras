@@ -11,7 +11,7 @@ use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Text;
-use Moonshine\Fields\Boolean;
+use MoonShine\Fields\Select; 
 use MoonShine\Components\MoonShineComponent;
 
 /**
@@ -31,11 +31,16 @@ class SolicitudResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                Boolean::make('Mantenimiento'),
-                Text::make('Responsable'),
+                Select::make('Mantenimiento')
+                ->options([
+                    'op1' => 'Si',
+                    'op2' => 'No'
+                ])
+                ->nullable(),
+                Text::make('Solicitante'),
                 Text::make('Institucion'),
                 Text::make('Direccion'),
-                Text::make('Referencia'),
+                Text::make('Referencia')
             ]),
         ];
     }
