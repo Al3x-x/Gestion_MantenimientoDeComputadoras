@@ -13,6 +13,7 @@ use MoonShine\Resources\MoonShineUserResource;
 use MoonShine\Resources\MoonShineUserRoleResource;
 use MoonShine\Contracts\Resources\ResourceContract;
 use App\MoonShine\Resources\SolicitudResource;
+use App\MoonShine\Resources\Inspección_y_ReporteResource;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
@@ -57,7 +58,7 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 
             ],'heroicons.computer-desktop')->canSee(fn()=> false)   
             ->canSee(function(Request $request){
-                return $request->user('moonshine')?->name === 'darwin.quezada';
+                return $request->user('moonshine')?->moonshine_user_role_id === 1;
             }),
 
             MenuItem::make(
@@ -70,15 +71,16 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             //     new MoonShineAsignacionMantenimiento()
             // )->canSee(fn()=> false)   
             //     ->canSee(function(Request $request){
-            //         return $request->user('moonshine')?->name === 'darwin.quezada';
+            //         return $request->user('moonshine')?->moonshine_user_role_id === 1;
             //     }),
 
             // MenuItem::make(
-            //     static fn() => __('Informes'),
-            //     new MoonShineInformes()
-            // )->canSee(fn()=> false)   
+            //     static fn() => __('Inspección y Reportes'),
+            //     new Inspección_y_ReporteResource()
+            // )
+            // ->canSee(fn()=> false)   
             //     ->canSee(function(Request $request){
-            //         return $request->user('moonshine')?->rol === 'Administrador' || $request->user('moonshine')?->rol === 'Tecnico';;
+            //         return $request->user('moonshine')?->moonshine_user_role_id === 1 || $request->user('moonshine')?->moonshine_user_role_id === 2;;
             //     }),
 
             MenuItem::make('ESPOCH', 'https://www.espoch.edu.ec')

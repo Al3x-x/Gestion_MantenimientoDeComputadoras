@@ -21,7 +21,10 @@ class SolicitudResource extends ModelResource
 {
     protected string $model = Solicitud::class;
 
-    protected string $title = 'Solicituds';
+    protected string $title = 'Solicitudes';
+    protected bool $createInModal = True;
+    protected bool $editInModal = True;
+    protected bool $deleteInModel = True;
 
     /**
      * @return list<MoonShineComponent|Field>
@@ -40,7 +43,7 @@ class SolicitudResource extends ModelResource
                 Text::make('Solicitante'),
                 Text::make('Institucion'),
                 Text::make('Direccion'),
-                Text::make('Referencia')
+                Text::make('Referencia'),
             ]),
         ];
     }
