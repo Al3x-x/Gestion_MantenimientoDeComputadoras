@@ -11,6 +11,7 @@ use MoonShine\Menu\MenuItem;
 use MoonShine\Menu\MenuDivider;
 use MoonShine\Resources\MoonShineUserResource;
 use MoonShine\Resources\MoonShineUserRoleResource;
+use App\MoonShine\Resources\AsignacionResource;
 use MoonShine\Contracts\Resources\ResourceContract;
 use App\MoonShine\Resources\SolicitudResource;
 use App\MoonShine\Resources\Inspección_y_ReporteResource;
@@ -66,13 +67,13 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 new SolicitudResource()
             ),
 
-            // MenuItem::make(
-            //     static fn() => __('Asignación del Mantenimiento'), 
-            //     new MoonShineAsignacionMantenimiento()
-            // )->canSee(fn()=> false)   
-            //     ->canSee(function(Request $request){
-            //         return $request->user('moonshine')?->moonshine_user_role_id === 1;
-            //     }),
+            MenuItem::make(
+                static fn() => __('Asignación Mantenimiento'), 
+                new AsignacionResource()
+            )->canSee(fn()=> false)   
+                ->canSee(function(Request $request){
+                    return $request->user('moonshine')?->moonshine_user_role_id === 1;
+                }),
 
             // MenuItem::make(
             //     static fn() => __('Inspección y Reportes'),
