@@ -46,24 +46,15 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
-            MenuGroup::make(static fn() => __('Panel de Control'), [
-                MenuItem::make(
-                    static fn() => __('Administradores'),
-                    new MoonShineUserResource()
-                ),
-
-                MenuDivider::make(),
-
-                MenuItem::make(
-                    static fn() => __('Roles'),
-                    new MoonShineUserRoleResource()
-                ) 
-
-            ],'heroicons.computer-desktop')->canSee(fn()=> false)   
-            ->canSee(function(Request $request){
-                return $request->user('moonshine')?->moonshine_user_role_id === 1;
-            }),
-
+            MenuGroup::make('System', [
+                MenuItem::make('Admins', new \Sweet1s\MoonshineRBAC\Resource\UserResource(), 
+                'heroicons.outline.users'),
+                MenuItem::make('Roles', new \Sweet1s\MoonshineRBAC\Resource\RoleResource(), 
+                'heroicons.outline.shield-exclamation'),
+                MenuItem::make('Permissions', new \Sweet1s\MoonshineRBAC\Resource\PermissionResource(), 
+                'heroicons.outline.shield-exclamation'),
+            ], 'heroicons.outline.user-group'),
+            
             MenuItem::make(
                 static fn() => __('Solicitud de Mantenimiento'), 
                 new SolicitudResource()
