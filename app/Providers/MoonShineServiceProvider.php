@@ -16,6 +16,7 @@ use App\MoonShine\Resources\AsignacionResource;
 use MoonShine\Contracts\Resources\ResourceContract;
 use App\MoonShine\Resources\SolicitudResource;
 use App\MoonShine\Resources\InformeResource;
+use App\MoonShine\Resources\DiagnosticoResource;
 
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
@@ -63,19 +64,17 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MenuItem::make(
                 static fn() => __('Asignación Mantenimiento'), 
                 new AsignacionResource()
-            )->canSee(fn()=> false)   
-                ->canSee(function(Request $request){
-                    return $request->user('moonshine')?->moonshine_user_role_id === 1;
-                }),
+            ),
 
             MenuItem::make(
-                static fn() => __('Inspección y Reportes'),
+                static fn() => __('Diagnostico'),
+                new DiagnosticoResource()
+            ),
+
+            MenuItem::make(
+                static fn() => __('Reportes'),
                 new InformeResource()
-            )
-            ->canSee(fn()=> false)   
-                ->canSee(function(Request $request){
-                    return $request->user('moonshine')?->moonshine_user_role_id === 1 || $request->user('moonshine')?->moonshine_user_role_id === 2;;
-                }),
+            ),
 
             MenuItem::make('ESPOCH', 'https://www.espoch.edu.ec')
             ->badge(fn() => 'Check')
